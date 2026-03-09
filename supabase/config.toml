@@ -1,1 +1,7 @@
 project_id = "matlwtdgfxkwhfeheibg"
+
+[functions.github-proxy]
+verify_jwt = false
+
+[functions.groq-chat]
+verify_jwt = false
