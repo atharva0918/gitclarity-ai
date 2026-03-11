@@ -5,12 +5,16 @@ import RepoOverview from "@/components/dashboard/RepoOverview";
 import AISummary from "@/components/dashboard/AISummary";
 import LanguageChart from "@/components/dashboard/LanguageChart";
 import ActivityCharts from "@/components/dashboard/ActivityCharts";
+import ContributionHeatmap from "@/components/dashboard/ContributionHeatmap";
 import FileTree from "@/components/dashboard/FileTree";
+import EntryPoints from "@/components/dashboard/EntryPoints";
 import TopContributors from "@/components/dashboard/TopContributors";
 import ContributionInsights from "@/components/dashboard/ContributionInsights";
-import RepoHealth from "@/components/dashboard/RepoHealth";
+import HowToContribute from "@/components/dashboard/HowToContribute";
+import ContributionIdeas from "@/components/dashboard/ContributionIdeas";
 import AIChatbot from "@/components/dashboard/AIChatbot";
-import { GitBranch, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 export default function Dashboard() {
   const { repoData } = useRepo();
@@ -24,17 +28,16 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Navbar */}
-      <nav className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
+      <nav className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-xl">
         <div className="container mx-auto flex items-center justify-between h-14 px-4">
           <div className="flex items-center gap-4">
             <button onClick={() => navigate("/")} className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
               <ArrowLeft className="h-4 w-4" />
-              <GitBranch className="h-5 w-5 text-primary" />
+              <img src={logo} alt="GitClarity" className="h-5 w-5" />
               <span className="font-heading font-bold">GitClarity</span>
             </button>
             <span className="text-muted-foreground">/</span>
-            <span className="text-sm font-mono">{repoData.owner}/{repoData.repo}</span>
+            <span className="text-sm font-mono text-muted-foreground">{repoData.owner}/{repoData.repo}</span>
           </div>
         </div>
       </nav>
@@ -46,10 +49,13 @@ export default function Dashboard() {
           <LanguageChart />
           <ActivityCharts />
         </div>
+        <ContributionHeatmap />
         <FileTree />
+        <EntryPoints />
         <TopContributors />
         <ContributionInsights />
-        <RepoHealth />
+        <HowToContribute />
+        <ContributionIdeas />
       </main>
 
       <AIChatbot />

@@ -55,33 +55,31 @@ README (first 3000 chars): ${repoData.readme.slice(0, 3000)}`;
 
   return (
     <>
-      {/* FAB */}
       <button
         onClick={() => setOpen(!open)}
-        className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg glow-accent hover:scale-105 transition-transform z-50"
+        className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-foreground text-background flex items-center justify-center shadow-lg hover:scale-105 transition-transform z-50"
       >
         {open ? <X className="h-5 w-5" /> : <Bot className="h-6 w-6" />}
       </button>
 
-      {/* Chat panel */}
       {open && (
         <div className="fixed bottom-24 right-6 w-[380px] max-h-[500px] rounded-xl bg-card border border-border shadow-2xl flex flex-col z-50 slide-in-right overflow-hidden">
           <div className="p-4 border-b border-border flex items-center gap-2">
-            <Bot className="h-5 w-5 text-primary" />
+            <Bot className="h-5 w-5 text-muted-foreground" />
             <h3 className="font-heading font-semibold text-sm">GitClarity Assistant</h3>
           </div>
 
           <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-[200px] max-h-[340px]">
             {messages.length === 0 && (
               <p className="text-xs text-muted-foreground text-center mt-8">
-                Ask me anything about <span className="text-primary font-mono">{repoData.owner}/{repoData.repo}</span>
+                Ask me anything about <span className="font-mono">{repoData.owner}/{repoData.repo}</span>
               </p>
             )}
             {messages.map((m, i) => (
               <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
                 <div className={`max-w-[85%] p-3 rounded-lg text-xs leading-relaxed ${
                   m.role === "user"
-                    ? "bg-primary text-primary-foreground"
+                    ? "bg-foreground text-background"
                     : "bg-surface text-foreground"
                 }`}>
                   {m.role === "assistant" ? (
@@ -95,7 +93,7 @@ README (first 3000 chars): ${repoData.readme.slice(0, 3000)}`;
             {loading && (
               <div className="flex justify-start">
                 <div className="p-3 rounded-lg bg-surface">
-                  <Loader2 className="h-4 w-4 animate-spin text-primary" />
+                  <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
                 </div>
               </div>
             )}
@@ -109,13 +107,13 @@ README (first 3000 chars): ${repoData.readme.slice(0, 3000)}`;
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && sendMessage()}
                 placeholder="Ask about this repo..."
-                className="flex-1 h-9 px-3 rounded-lg bg-surface border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50"
+                className="flex-1 h-9 px-3 rounded-lg bg-surface border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-foreground/20"
                 disabled={loading}
               />
               <button
                 onClick={sendMessage}
                 disabled={loading || !input.trim()}
-                className="h-9 w-9 rounded-lg bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-50"
+                className="h-9 w-9 rounded-lg bg-foreground text-background flex items-center justify-center disabled:opacity-50"
               >
                 <Send className="h-3.5 w-3.5" />
               </button>
