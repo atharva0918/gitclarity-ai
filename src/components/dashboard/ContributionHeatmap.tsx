@@ -4,9 +4,10 @@ import { useMemo } from "react";
 
 export default function ContributionHeatmap() {
   const { repoData } = useRepo();
-  if (!repoData) return null;
 
   const heatmapData = useMemo(() => {
+    if (!repoData) return [];
+
     const dayMap: Record<string, number> = {};
     repoData.commits.forEach((c: any) => {
       const d = new Date(c.commit?.author?.date || c.commit?.committer?.date);
