@@ -29,7 +29,9 @@ export default function ContributionHeatmap() {
       weeks.push(week);
     }
     return weeks;
-  }, [repoData.commits]);
+  }, [repoData?.commits]);
+
+  if (!repoData) return null;
 
   const maxCount = Math.max(1, ...heatmapData.flat().map(d => d.count));
 
