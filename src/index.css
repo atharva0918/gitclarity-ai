@@ -6,51 +6,58 @@
 
 @layer base {
   :root {
-    --background: 222 47% 11%;
-    --foreground: 220 13% 91%;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
 
-    --card: 221 39% 11%;
-    --card-foreground: 220 13% 91%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 221 39% 11%;
-    --popover-foreground: 220 13% 91%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 258 90% 66%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
 
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 220 13% 91%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 217 33% 17%;
-    --muted-foreground: 218 11% 65%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 69%;
 
-    --accent: 258 90% 66%;
+    --accent: 0 0% 15%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 258 90% 66%;
+    --border: 0 0% 13%;
+    --input: 0 0% 13%;
+    --ring: 0 0% 40%;
 
     --radius: 0.75rem;
 
-    --sidebar-background: 222 47% 11%;
-    --sidebar-foreground: 220 13% 91%;
-    --sidebar-primary: 258 90% 66%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 217 33% 17%;
-    --sidebar-accent-foreground: 220 13% 91%;
-    --sidebar-border: 217 33% 17%;
-    --sidebar-ring: 258 90% 66%;
+    --sidebar-background: 0 0% 3%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 13%;
+    --sidebar-ring: 0 0% 40%;
 
     /* Custom tokens */
-    --surface: 222 47% 7%;
-    --surface-hover: 222 40% 14%;
-    --glow: 258 90% 66%;
+    --surface: 0 0% 7%;
+    --surface-hover: 0 0% 12%;
+    --glow: 0 0% 100%;
     --success: 142 71% 45%;
     --warning: 38 92% 50%;
+
+    /* Chart accent colors */
+    --chart-blue: 217 91% 60%;
+    --chart-cyan: 187 92% 50%;
+    --chart-green: 142 71% 45%;
+    --chart-orange: 25 95% 53%;
+    --chart-purple: 258 90% 66%;
   }
 }
 
@@ -73,25 +80,21 @@
 }
 
 @layer utilities {
-  .glow-accent {
-    box-shadow: 0 0 20px hsl(var(--glow) / 0.15), 0 0 60px hsl(var(--glow) / 0.05);
+  .glow-white {
+    box-shadow: 0 0 20px hsl(0 0% 100% / 0.06), 0 0 60px hsl(0 0% 100% / 0.03);
   }
 
-  .glow-accent-hover:hover {
-    box-shadow: 0 0 30px hsl(var(--glow) / 0.25), 0 0 80px hsl(var(--glow) / 0.1);
+  .glow-white-hover:hover {
+    box-shadow: 0 0 30px hsl(0 0% 100% / 0.1), 0 0 80px hsl(0 0% 100% / 0.05);
   }
 
   .card-hover {
     @apply transition-all duration-300;
   }
   .card-hover:hover {
-    @apply border-accent/30;
+    border-color: hsl(0 0% 25%);
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px hsl(var(--glow) / 0.08);
-  }
-
-  .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(258,90%,78%)];
+    box-shadow: 0 8px 30px hsl(0 0% 100% / 0.04);
   }
 
   .fade-in {
@@ -105,6 +108,11 @@
   .slide-in-right {
     animation: slideInRight 0.3s ease-out forwards;
   }
+
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
 }
 
 @keyframes fadeIn {
@@ -120,6 +128,33 @@
 @keyframes slideInRight {
   from { opacity: 0; transform: translateX(20px); }
   to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes network-line {
+  0% { stroke-dashoffset: 100; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 6s ease-in-out 2s infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
 }
 
 /* Scrollbar */

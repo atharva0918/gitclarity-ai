@@ -20,9 +20,14 @@ export default function ContributionInsights() {
           </h3>
           <div className="space-y-2">
             {recentCommits.map((c: any) => (
-              <a key={c.sha} href={c.html_url} target="_blank" rel="noopener noreferrer" className="block p-2.5 rounded-lg bg-surface hover:bg-surface-hover transition-colors">
+              <a key={c.sha} href={c.html_url} target="_blank" rel="noopener noreferrer" className="block p-2.5 rounded-lg bg-surface hover:bg-surface-hover transition-colors group">
                 <p className="text-xs font-mono truncate">{c.commit?.message?.split("\n")[0]}</p>
-                <p className="text-xs text-muted-foreground mt-1">{c.commit?.author?.name} · {new Date(c.commit?.author?.date).toLocaleDateString()}</p>
+                <div className="flex items-center justify-between mt-1">
+                  <p className="text-xs text-muted-foreground">{c.commit?.author?.name} · {new Date(c.commit?.author?.date).toLocaleDateString()}</p>
+                  <span className="text-xs text-muted-foreground group-hover:text-foreground flex items-center gap-1 transition-colors">
+                    View <ExternalLink className="h-3 w-3" />
+                  </span>
+                </div>
               </a>
             ))}
           </div>
@@ -35,9 +40,14 @@ export default function ContributionInsights() {
           </h3>
           <div className="space-y-2">
             {recentPRs.length > 0 ? recentPRs.map((p: any) => (
-              <a key={p.id} href={p.html_url} target="_blank" rel="noopener noreferrer" className="block p-2.5 rounded-lg bg-surface hover:bg-surface-hover transition-colors">
+              <a key={p.id} href={p.html_url} target="_blank" rel="noopener noreferrer" className="block p-2.5 rounded-lg bg-surface hover:bg-surface-hover transition-colors group">
                 <p className="text-xs truncate">{p.title}</p>
-                <p className="text-xs text-muted-foreground mt-1">{p.user?.login} · {p.state}</p>
+                <div className="flex items-center justify-between mt-1">
+                  <p className="text-xs text-muted-foreground">{p.user?.login} · {p.state}</p>
+                  <span className="text-xs text-muted-foreground group-hover:text-foreground flex items-center gap-1 transition-colors">
+                    View <ExternalLink className="h-3 w-3" />
+                  </span>
+                </div>
               </a>
             )) : <p className="text-xs text-muted-foreground">No pull requests found.</p>}
           </div>
@@ -50,9 +60,14 @@ export default function ContributionInsights() {
           </h3>
           <div className="space-y-2">
             {goodFirstIssues.length > 0 ? goodFirstIssues.map((i: any) => (
-              <a key={i.id} href={i.html_url} target="_blank" rel="noopener noreferrer" className="block p-2.5 rounded-lg bg-surface hover:bg-surface-hover transition-colors">
+              <a key={i.id} href={i.html_url} target="_blank" rel="noopener noreferrer" className="block p-2.5 rounded-lg bg-surface hover:bg-surface-hover transition-colors group">
                 <p className="text-xs truncate">{i.title}</p>
-                <p className="text-xs text-muted-foreground mt-1">#{i.number} · {i.state}</p>
+                <div className="flex items-center justify-between mt-1">
+                  <p className="text-xs text-muted-foreground">#{i.number} · {i.state}</p>
+                  <span className="text-xs text-muted-foreground group-hover:text-foreground flex items-center gap-1 transition-colors">
+                    Open <ExternalLink className="h-3 w-3" />
+                  </span>
+                </div>
               </a>
             )) : <p className="text-xs text-muted-foreground">No good first issues found.</p>}
           </div>

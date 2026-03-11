@@ -19,14 +19,14 @@ export default function RepoOverview() {
     <div className="rounded-xl bg-card border border-border p-6 fade-in">
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-6">
         <div className="flex items-start gap-4">
-          <img src={m.owner?.avatar_url} alt={m.owner?.login} className="h-12 w-12 rounded-lg" />
+          <img src={m.owner?.avatar_url} alt={m.owner?.login} className="h-12 w-12 rounded-lg border border-border" />
           <div>
             <h1 className="text-2xl font-heading font-bold">{m.full_name}</h1>
             {m.description && <p className="text-muted-foreground mt-1 text-sm max-w-2xl">{m.description}</p>}
             {m.topics?.length > 0 && (
               <div className="flex flex-wrap gap-2 mt-3">
                 {m.topics.slice(0, 8).map((t: string) => (
-                  <span key={t} className="px-2 py-0.5 rounded-md bg-primary/10 text-primary text-xs font-mono">{t}</span>
+                  <span key={t} className="px-2 py-0.5 rounded-md bg-accent text-foreground text-xs font-mono">{t}</span>
                 ))}
               </div>
             )}
@@ -35,7 +35,7 @@ export default function RepoOverview() {
         <div className="flex items-center gap-2">
           <button
             onClick={() => analyzeRepo(repoData.owner, repoData.repo)}
-            className="h-9 px-3 rounded-lg border border-border text-sm text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all flex items-center gap-2"
+            className="h-9 px-3 rounded-lg border border-border text-sm text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-all flex items-center gap-2"
           >
             <RefreshCw className="h-3.5 w-3.5" /> Refresh
           </button>
@@ -43,9 +43,9 @@ export default function RepoOverview() {
             href={m.html_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="h-9 px-3 rounded-lg bg-secondary text-secondary-foreground text-sm flex items-center gap-2 hover:bg-secondary/80 transition-colors"
+            className="h-9 px-3 rounded-lg bg-foreground text-background text-sm flex items-center gap-2 hover:bg-foreground/90 transition-colors"
           >
-            <ExternalLink className="h-3.5 w-3.5" /> GitHub
+            <ExternalLink className="h-3.5 w-3.5" /> Open on GitHub
           </a>
         </div>
       </div>

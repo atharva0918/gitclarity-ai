@@ -37,22 +37,24 @@ function buildTree(items: any[]): TreeNode[] {
   return root;
 }
 
+const IMPORTANT_FILES = ["README.md", "package.json", "requirements.txt", "Dockerfile", "docker-compose.yml", "setup.py", "setup.cfg", "Makefile", "CONTRIBUTING.md"];
+
 function TreeItem({ node, owner, repo, depth = 0 }: { node: TreeNode; owner: string; repo: string; depth?: number }) {
   const [open, setOpen] = useState(depth < 1);
   const isDir = node.type === "tree" || node.children.length > 0;
-  const highlight = ["README.md", "package.json", "requirements.txt", "main.py", "index.js", "index.ts", "app.py", "server.js"].includes(node.name);
+  const highlight = IMPORTANT_FILES.includes(node.name);
 
   return (
     <div>
       <div
-        className={`flex items-center gap-1.5 py-1 px-2 rounded text-sm cursor-pointer hover:bg-surface-hover transition-colors ${highlight ? "text-primary" : "text-foreground"}`}
+        className={`flex items-center gap-1.5 py-1 px-2 rounded text-sm cursor-pointer hover:bg-surface-hover transition-colors ${highlight ? "text-foreground font-medium" : "text-muted-foreground"}`}
         style={{ paddingLeft: `${depth * 16 + 8}px` }}
         onClick={() => isDir && setOpen(!open)}
       >
         {isDir ? (
-          open ? <ChevronDown className="h-3.5 w-3.5 text-muted-foreground shrink-0" /> : <ChevronRight className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+          open ? <ChevronDown className="h-3.5 w-3.5 shrink-0" /> : <ChevronRight className="h-3.5 w-3.5 shrink-0" />
         ) : <span className="w-3.5" />}
-        {isDir ? <Folder className="h-3.5 w-3.5 text-muted-foreground shrink-0" /> : <File className="h-3.5 w-3.5 text-muted-foreground shrink-0" />}
+        {isDir ? <Folder className="h-3.5 w-3.5 shrink-0" /> : <File className="h-3.5 w-3.5 shrink-0" />}
         <span className="truncate font-mono text-xs">{node.name}</span>
         {!isDir && (
           <a
@@ -62,7 +64,7 @@ function TreeItem({ node, owner, repo, depth = 0 }: { node: TreeNode; owner: str
             onClick={(e) => e.stopPropagation()}
             className="ml-auto opacity-0 group-hover:opacity-100"
           >
-            <ExternalLink className="h-3 w-3 text-muted-foreground hover:text-primary" />
+            <ExternalLink className="h-3 w-3 hover:text-foreground" />
           </a>
         )}
       </div>
@@ -91,8 +93,8 @@ export default function FileTree() {
     <div className="rounded-xl bg-card border border-border p-6 fade-in">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <FolderTree className="h-5 w-5 text-primary" />
-          <h2 className="text-lg font-heading font-semibold">File Structure</h2>
+          <FolderTree className="h-5 w-5 text-muted-foreground" />
+          <h2 className="text-lg font-heading font-semibold">Codebase Structure</h2>
           <span className="text-xs text-muted-foreground">({repoData.tree.length} files)</span>
         </div>
         <div className="relative">
@@ -101,7 +103,7 @@ export default function FileTree() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search files..."
-            className="h-8 pl-8 pr-3 rounded-md bg-surface border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 w-48"
+            className="h-8 pl-8 pr-3 rounded-md bg-surface border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-foreground/20 w-48"
           />
         </div>
       </div>
