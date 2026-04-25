@@ -5,10 +5,11 @@ import RepoOverview from "@/components/dashboard/RepoOverview";
 import AISummary from "@/components/dashboard/AISummary";
 import LanguageChart from "@/components/dashboard/LanguageChart";
 import ActivityCharts from "@/components/dashboard/ActivityCharts";
-import ContributionHeatmap from "@/components/dashboard/ContributionHeatmap";
+import ActivityInsights from "@/components/dashboard/ActivityInsights";
 import FileTree from "@/components/dashboard/FileTree";
 import EntryPoints from "@/components/dashboard/EntryPoints";
 import TopContributors from "@/components/dashboard/TopContributors";
+import BestFirstSteps from "@/components/dashboard/BestFirstSteps";
 import ContributionInsights from "@/components/dashboard/ContributionInsights";
 import HowToContribute from "@/components/dashboard/HowToContribute";
 import ContributionIdeas from "@/components/dashboard/ContributionIdeas";
@@ -43,16 +44,30 @@ export default function Dashboard() {
       </nav>
 
       <main className="container mx-auto px-4 py-8 space-y-8 max-w-6xl">
+        {/* 1. WHAT IS THIS REPOSITORY? */}
         <RepoOverview />
+
+        {/* 2. WHAT DOES IT DO? */}
         <AISummary />
-        <div className="grid lg:grid-cols-2 gap-8">
-          <LanguageChart />
-          <ActivityCharts />
-        </div>
-        <ContributionHeatmap />
+
+        {/* 3. HOW IS IT BUILT? */}
         <FileTree />
         <EntryPoints />
+        <LanguageChart />
+
+        {/* 4. HOW ACTIVE IS IT? */}
+        <div className="grid lg:grid-cols-2 gap-8">
+          <ActivityCharts />
+          <ActivityInsights />
+        </div>
+
+        {/* 5. WHO CONTRIBUTES? */}
         <TopContributors />
+
+        {/* 6. WHERE SHOULD I START? */}
+        <BestFirstSteps />
+
+        {/* 7. HOW CAN I CONTRIBUTE? */}
         <ContributionInsights />
         <HowToContribute />
         <ContributionIdeas />

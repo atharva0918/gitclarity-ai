@@ -43,9 +43,9 @@ export default function RepoOverview() {
             href={m.html_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="h-9 px-3 rounded-lg bg-foreground text-background text-sm flex items-center gap-2 hover:bg-foreground/90 transition-colors"
+            className="h-9 px-3 rounded-lg bg-foreground text-background text-sm inline-flex items-center gap-2 hover:bg-foreground/90 transition-colors whitespace-nowrap"
           >
-            <ExternalLink className="h-3.5 w-3.5" /> Open on GitHub
+            <ExternalLink className="h-3.5 w-3.5 shrink-0" /> Open on GitHub
           </a>
         </div>
       </div>
