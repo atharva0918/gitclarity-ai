@@ -1,6 +1,7 @@
 import { useRepo } from "@/context/RepoContext";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "@/context/AuthContext";
 import RepoOverview from "@/components/dashboard/RepoOverview";
 import AISummary from "@/components/dashboard/AISummary";
 import LanguageChart from "@/components/dashboard/LanguageChart";
@@ -14,66 +15,56 @@ import ContributionInsights from "@/components/dashboard/ContributionInsights";
 import HowToContribute from "@/components/dashboard/HowToContribute";
 import ContributionIdeas from "@/components/dashboard/ContributionIdeas";
 import AIChatbot from "@/components/dashboard/AIChatbot";
-import { ArrowLeft } from "lucide-react";
-import logo from "@/assets/logo.png";
+import Navbar from "@/components/Navbar";
+import SaveRepoModal from "@/components/SaveRepoModal";
+import { Bookmark } from "lucide-react";
 
 export default function Dashboard() {
   const { repoData } = useRepo();
+  const { user, loading } = useAuth();
   const navigate = useNavigate();
+  const [saveOpen, setSaveOpen] = useState(false);
 
   useEffect(() => {
-    if (!repoData) navigate("/");
-  }, [repoData, navigate]);
+    if (!loading && !user) navigate("/");
+    else if (!repoData) navigate("/");
+  }, [repoData, user, loading, navigate]);
 
   if (!repoData) return null;
 
   return (
     <div className="min-h-screen bg-background">
-      <nav className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-xl">
-        <div className="container mx-auto flex items-center justify-between h-14 px-4">
-          <div className="flex items-center gap-4">
-            <button onClick={() => navigate("/")} className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
-              <ArrowLeft className="h-4 w-4" />
-              <img src={logo} alt="GitClarity" className="h-5 w-5" />
-              <span className="font-heading font-bold">GitClarity</span>
-            </button>
-            <span className="text-muted-foreground">/</span>
-            <span className="text-sm font-mono text-muted-foreground">{repoData.owner}/{repoData.repo}</span>
-          </div>
+      <Navbar />
+
+      <main className="container mx-auto px-4 pt-24 pb-12 space-y-8 max-w-6xl">
+        <div className="flex items-center justify-between gap-4">
+          <p className="text-sm font-mono text-muted-foreground truncate">{repoData.owner}/{repoData.repo}</p>
+          <button
+            onClick={() => setSaveOpen(true)}
+            className="h-9 px-4 rounded-lg bg-foreground text-background text-sm font-medium hover:bg-foreground/90 transition-colors inline-flex items-center gap-2 whitespace-nowrap"
+          >
+            <Bookmark className="h-4 w-4" /> Save Repository
+          </button>
         </div>
-      </nav>
 
-      <main className="container mx-auto px-4 py-8 space-y-8 max-w-6xl">
-        {/* 1. WHAT IS THIS REPOSITORY? */}
         <RepoOverview />
-
-        {/* 2. WHAT DOES IT DO? */}
         <AISummary />
-
-        {/* 3. HOW IS IT BUILT? */}
         <FileTree />
         <EntryPoints />
         <LanguageChart />
-
-        {/* 4. HOW ACTIVE IS IT? */}
         <div className="grid lg:grid-cols-2 gap-8">
           <ActivityCharts />
           <ActivityInsights />
         </div>
-
-        {/* 5. WHO CONTRIBUTES? */}
         <TopContributors />
-
-        {/* 6. WHERE SHOULD I START? */}
         <BestFirstSteps />
-
-        {/* 7. HOW CAN I CONTRIBUTE? */}
         <ContributionInsights />
         <HowToContribute />
         <ContributionIdeas />
       </main>
 
       <AIChatbot />
+      <SaveRepoModal open={saveOpen} onOpenChange={setSaveOpen} />
     </div>
   );
 }

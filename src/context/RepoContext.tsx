@@ -107,6 +107,24 @@ README (first 2000 chars): ${readme.slice(0, 2000)}`;
         tree, readme, aiSummary,
       });
 
+      // Log analysis history (best effort, ignore failures)
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          await supabase.from("analysis_history").insert({
+            user_id: user.id,
+            repo_owner: owner,
+            repo_name: repo,
+            github_repo_link: metadata.html_url,
+            description: metadata.description ?? "",
+            stars: metadata.stargazers_count ?? 0,
+            forks: metadata.forks_count ?? 0,
+            open_issues: metadata.open_issues_count ?? 0,
+            ai_summary: aiSummary ?? "",
+          });
+        }
+      } catch { /* ignore */ }
+
       setIsLoading(false);
       setLoadingStatus("");
       return true;
