@@ -5,9 +5,9 @@ import { useMemo } from "react";
 
 export default function ActivityCharts() {
   const { repoData } = useRepo();
-  if (!repoData) return null;
 
   const commitData = useMemo(() => {
+    if (!repoData) return [];
     const byMonth: Record<string, { count: number; sortKey: string }> = {};
     repoData.commits.forEach((c: any) => {
       const raw = c.commit?.author?.date || c.commit?.committer?.date;
@@ -21,7 +21,9 @@ export default function ActivityCharts() {
     return Object.entries(byMonth)
       .sort((a, b) => a[1].sortKey.localeCompare(b[1].sortKey))
       .map(([month, v]) => ({ month, commits: v.count }));
-  }, [repoData.commits]);
+  }, [repoData?.commits]);
+
+  if (!repoData) return null;
 
   return (
     <div className="rounded-xl bg-card border border-border p-6 fade-in h-full">
