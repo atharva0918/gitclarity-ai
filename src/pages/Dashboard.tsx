@@ -44,16 +44,30 @@ export default function Dashboard() {
       </nav>
 
       <main className="container mx-auto px-4 py-8 space-y-8 max-w-6xl">
+        {/* 1. WHAT IS THIS REPOSITORY? */}
         <RepoOverview />
+
+        {/* 2. WHAT DOES IT DO? */}
         <AISummary />
-        <div className="grid lg:grid-cols-2 gap-8">
-          <LanguageChart />
-          <ActivityCharts />
-        </div>
-        <ContributionHeatmap />
+
+        {/* 3. HOW IS IT BUILT? */}
         <FileTree />
         <EntryPoints />
+        <LanguageChart />
+
+        {/* 4. HOW ACTIVE IS IT? */}
+        <div className="grid lg:grid-cols-2 gap-8">
+          <ActivityCharts />
+          <ActivityInsights />
+        </div>
+
+        {/* 5. WHO CONTRIBUTES? */}
         <TopContributors />
+
+        {/* 6. WHERE SHOULD I START? */}
+        <BestFirstSteps />
+
+        {/* 7. HOW CAN I CONTRIBUTE? */}
         <ContributionInsights />
         <HowToContribute />
         <ContributionIdeas />
