@@ -14,7 +14,129 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      analysis_history: {
+        Row: {
+          ai_summary: string | null
+          analyzed_at: string
+          description: string | null
+          forks: number | null
+          github_repo_link: string
+          id: string
+          open_issues: number | null
+          repo_name: string
+          repo_owner: string
+          stars: number | null
+          user_id: string
+        }
+        Insert: {
+          ai_summary?: string | null
+          analyzed_at?: string
+          description?: string | null
+          forks?: number | null
+          github_repo_link: string
+          id?: string
+          open_issues?: number | null
+          repo_name: string
+          repo_owner: string
+          stars?: number | null
+          user_id: string
+        }
+        Update: {
+          ai_summary?: string | null
+          analyzed_at?: string
+          description?: string | null
+          forks?: number | null
+          github_repo_link?: string
+          id?: string
+          open_issues?: number | null
+          repo_name?: string
+          repo_owner?: string
+          stars?: number | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          email: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      saved_repositories: {
+        Row: {
+          ai_summary: string | null
+          contributors: number | null
+          created_at: string
+          description: string | null
+          forks: number | null
+          future_task: string
+          github_repo_link: string
+          id: string
+          open_issues: number | null
+          repo_name: string
+          repo_owner: string
+          stars: number | null
+          user_id: string
+          user_understanding: string
+        }
+        Insert: {
+          ai_summary?: string | null
+          contributors?: number | null
+          created_at?: string
+          description?: string | null
+          forks?: number | null
+          future_task: string
+          github_repo_link: string
+          id?: string
+          open_issues?: number | null
+          repo_name: string
+          repo_owner: string
+          stars?: number | null
+          user_id: string
+          user_understanding: string
+        }
+        Update: {
+          ai_summary?: string | null
+          contributors?: number | null
+          created_at?: string
+          description?: string | null
+          forks?: number | null
+          future_task?: string
+          github_repo_link?: string
+          id?: string
+          open_issues?: number | null
+          repo_name?: string
+          repo_owner?: string
+          stars?: number | null
+          user_id?: string
+          user_understanding?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
