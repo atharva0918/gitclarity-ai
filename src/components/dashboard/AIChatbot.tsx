@@ -93,13 +93,15 @@ README (first 3000 chars): ${repoData.readme.slice(0, 3000)}`;
 
   return (
     <>
-      {/* Floating toggle button */}
+      {/* Floating open button — only visible when chat is closed */}
       <button
-        onClick={() => onOpenChange(!open)}
-        className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-foreground text-background flex items-center justify-center shadow-lg hover:scale-105 transition-transform z-50"
-        aria-label={open ? "Close assistant" : "Open assistant"}
+        onClick={() => onOpenChange(true)}
+        className={`fixed bottom-6 right-6 h-14 w-14 rounded-full bg-foreground text-background flex items-center justify-center shadow-lg hover:scale-105 transition-all duration-300 z-50 ${
+          open ? "opacity-0 scale-90 pointer-events-none" : "opacity-100 scale-100"
+        }`}
+        aria-label="Open assistant"
       >
-        {open ? <X className="h-5 w-5" /> : <Bot className="h-6 w-6" />}
+        <Bot className="h-6 w-6" />
       </button>
 
       {/* Side panel — slides in from right, takes 1/4 width */}
@@ -108,9 +110,18 @@ README (first 3000 chars): ${repoData.readme.slice(0, 3000)}`;
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="p-4 border-b border-border flex items-center gap-2 shrink-0">
-          <Bot className="h-5 w-5 text-muted-foreground" />
-          <h3 className="font-heading font-semibold text-sm">GitClarity Assistant</h3>
+        <div className="p-4 border-b border-border flex items-center justify-between gap-2 shrink-0">
+          <div className="flex items-center gap-2">
+            <Bot className="h-5 w-5 text-muted-foreground" />
+            <h3 className="font-heading font-semibold text-sm">GitClarity Assistant</h3>
+          </div>
+          <button
+            onClick={() => onOpenChange(false)}
+            className="h-8 w-8 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-surface transition-colors"
+            aria-label="Close assistant"
+          >
+            <X className="h-4 w-4" />
+          </button>
         </div>
 
         <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-3">
