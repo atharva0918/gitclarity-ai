@@ -1,73 +1,313 @@
-# Welcome to your Lovable project
+# 🚀 GitClarity
 
-## Project info
+> Understand any GitHub repository instantly.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+GitClarity is a developer intelligence platform that transforms any GitHub repository into a structured, interactive dashboard. It helps developers quickly understand codebases, analyze activity, and identify meaningful contribution opportunities using AI and visual insights.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+# 🧠 Why GitClarity Exists
 
-**Use Lovable**
+Understanding a new repository is slow and frustrating:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+- No clear entry point
+- Scattered documentation
+- Complex file structures
+- Unknown activity level
+- No clear contribution path
 
-Changes made via Lovable will be committed automatically to this repo.
+GitClarity solves this by converting raw GitHub data into **structured intelligence**.
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+# 💡 What GitClarity Does
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+GitClarity takes a GitHub repository URL and generates:
 
-Follow these steps:
+- 📌 Clear explanation of the project
+- 📊 Visual tech stack and activity insights
+- 🧭 Guided codebase navigation
+- 👥 Contributor analysis
+- 🚀 Contribution suggestions
+- 💬 AI-powered repository Q&A
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+---
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# 🏗️ System Architecture
 
-# Step 3: Install the necessary dependencies.
-npm i
+<img width="1774" height="887" alt="ChatGPT Image Apr 26, 2026, 02_53_57 PM" src="https://github.com/user-attachments/assets/b92bc978-0af0-435c-af65-e23a3fc15e83" />
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+---
 
-**Edit a file directly in GitHub**
+### Flow:
+1. User enters repository URL  
+2. Frontend sends request to backend (edge functions)  
+3. Backend securely fetches GitHub data  
+4. AI processes repository context  
+5. Data is structured and sent to frontend  
+6. Dashboard renders insights  
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+# ⚙️ Core Features
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🔍 Repository Overview
+Displays:
+- Stars, forks, issues
+- Description and topics
+- Last commit info
+- Direct GitHub navigation links
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+## 🧠 AI Repository Summary
+- Generated using README + metadata + commits
+- Explains:
+  - What the project does
+  - Technologies used
+  - Purpose and scope
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+---
 
-## How can I deploy this project?
+## 📊 Technology Stack Visualization
+- Language distribution chart
+- Built using Recharts
+- Helps understand tech stack instantly
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+---
 
-## Can I connect a custom domain to my Lovable project?
+## 📈 Commit Activity Analysis
+- Line chart showing commit trends over time
+- Identifies active vs inactive projects
 
-Yes, you can!
+---
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## ⚡ Activity Insights Card
+Provides:
+- Commit frequency
+- Last commit recency
+- Development consistency
+- Estimated project activity level
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+---
+
+## 🗂️ Codebase Structure Analysis
+- Detects important files:
+  - README.md
+  - package.json
+  - requirements.txt
+- Identifies key directories and structure
+
+---
+
+## 🚀 Start Reading the Code Here
+- Suggests entry points:
+  - main.py
+  - index.js
+  - app.js
+- Helps developers avoid confusion
+
+---
+
+## 👥 Top Contributors
+- Shows top contributors
+- Contribution percentages
+- Links to GitHub contribution graph
+
+---
+
+## 🔗 Contribution Insights
+- Recent commits
+- Pull requests
+- Good first issues
+
+---
+
+## 📘 How to Contribute
+- Extracted setup instructions
+- Copyable commands
+- Step-by-step contribution flow
+
+---
+
+## 💡 AI Suggested Contribution Ideas
+- Beginner-friendly tasks
+- Code improvements
+- Documentation gaps
+
+---
+
+## 💬 AI Chat Assistant
+- Context-aware chatbot
+- Answers based only on repository data
+- Helps users explore code faster
+
+---
+
+# 🎨 Frontend Tech Stack
+
+- React 18 — Component-based UI
+- TypeScript 5 — Type safety
+- Vite 5 — Fast build tool
+- React Router v6 — Routing system
+
+---
+
+# 💅 Styling & Design System
+
+- Tailwind CSS — Utility-first styling
+- shadcn/ui — Accessible UI components
+- Radix UI — Headless UI primitives
+- Framer Motion — Animations
+- Lucide React — Icons
+
+### Typography:
+- Space Grotesk — Headings
+- Inter — Body text
+- JetBrains Mono — Code blocks
+
+---
+
+# 📊 Visualization & UI Enhancements
+
+- Recharts — Charts (language, activity)
+- React Markdown — Render AI responses
+- CMDK — Command palette
+- Embla Carousel — UI carousel
+- Sonner — Toast notifications
+
+---
+
+# 🔄 State & Data Management
+
+- TanStack Query — API caching & async state
+- React Context API — Global state
+  - AuthContext
+  - RepoContext
+- React Hook Form + Zod — Form validation
+
+---
+
+# ☁️ Backend Architecture
+
+Powered by Lovable Cloud (Supabase-based infrastructure)
+
+### Database (PostgreSQL):
+- profiles
+- saved_repositories
+- analysis_history
+
+### Security:
+- Row Level Security (RLS)
+- User-specific data isolation
+
+---
+
+# 🔐 Authentication
+
+- Supabase Auth
+- Email/Password login
+- Google OAuth
+
+---
+
+# ⚡ Edge Functions (Serverless)
+
+## 1. github-proxy
+- Fetches GitHub data securely
+- Keeps GitHub token hidden
+- Handles:
+  - repos
+  - commits
+  - issues
+  - contributors
+  - file tree
+
+## 2. groq-chat
+- Handles AI requests
+- Generates:
+  - summaries
+  - chatbot responses
+  - contribution ideas
+
+---
+
+# 🤖 AI Layer
+
+- Lovable AI Gateway
+- Supports:
+  - Google Gemini
+  - OpenAI GPT models
+
+Used for:
+- Repository summaries
+- Contribution suggestions
+- Chat assistant
+
+---
+
+# 🌐 External APIs
+
+- GitHub REST API (proxied via backend)
+
+---
+
+# 🔐 Security Architecture
+
+- API keys stored server-side only
+- No client-side exposure
+- JWT-based authentication
+- HTTPS enforced
+
+---
+
+# 🧪 Testing & Code Quality
+
+- Vitest — Unit testing
+- Playwright — End-to-end testing
+- ESLint — Code linting
+- TypeScript strict mode
+
+---
+
+# 📦 Build & Tooling
+
+- Bun — Package manager
+- PostCSS + Autoprefixer — CSS processing
+- SWC — Fast compilation
+
+---
+
+# 🚀 Deployment
+
+- Lovable Platform — Hosting & backend
+- One-click deployment
+- Preview environments
+
+---
+
+# 🎯 Use Cases
+
+- Developers exploring open source
+- Students learning real-world code
+- Contributors finding beginner issues
+- Teams analyzing repositories
+
+---
+
+# 🔮 Future Improvements
+
+- Multi-repo comparison
+- Advanced code dependency mapping
+- AI code walkthrough mode
+- Team collaboration features
+
+---
+
+# 👨‍💻 Author
+
+Atharva Pawar
+
+---
+
+GitClarity is not just a UI tool — it is a system designed to convert raw repository data into structured developer intelligence.
