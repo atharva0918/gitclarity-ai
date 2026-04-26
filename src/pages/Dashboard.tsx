@@ -24,6 +24,7 @@ export default function Dashboard() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
   const [saveOpen, setSaveOpen] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) navigate("/");
@@ -36,34 +37,43 @@ export default function Dashboard() {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      <main className="container mx-auto px-4 pt-24 pb-12 space-y-8 max-w-6xl">
-        <div className="flex items-center justify-between gap-4">
-          <p className="text-sm font-mono text-muted-foreground truncate">{repoData.owner}/{repoData.repo}</p>
-          <button
-            onClick={() => setSaveOpen(true)}
-            className="h-9 px-4 rounded-lg bg-foreground text-background text-sm font-medium hover:bg-foreground/90 transition-colors inline-flex items-center gap-2 whitespace-nowrap"
-          >
-            <Bookmark className="h-4 w-4" /> Save Repository
-          </button>
-        </div>
+      {/* Dashboard pane — shrinks to 3/4 width when chat is open */}
+      <div
+        className={`fixed top-16 left-0 bottom-0 overflow-y-auto transition-[width] duration-500 ease-in-out ${
+          chatOpen ? "w-3/4" : "w-full"
+        }`}
+      >
+        <main className="container mx-auto px-4 pt-8 pb-12 space-y-8 max-w-6xl">
+          <div className="flex items-center justify-between gap-4">
+            <p className="text-sm font-mono text-muted-foreground truncate">
+              {repoData.owner}/{repoData.repo}
+            </p>
+            <button
+              onClick={() => setSaveOpen(true)}
+              className="h-9 px-4 rounded-lg bg-foreground text-background text-sm font-medium hover:bg-foreground/90 transition-colors inline-flex items-center gap-2 whitespace-nowrap"
+            >
+              <Bookmark className="h-4 w-4" /> Save Repository
+            </button>
+          </div>
 
-        <RepoOverview />
-        <AISummary />
-        <FileTree />
-        <EntryPoints />
-        <LanguageChart />
-        <div className="grid lg:grid-cols-2 gap-8">
-          <ActivityCharts />
-          <ActivityInsights />
-        </div>
-        <TopContributors />
-        <BestFirstSteps />
-        <ContributionInsights />
-        <HowToContribute />
-        <ContributionIdeas />
-      </main>
+          <RepoOverview />
+          <AISummary />
+          <FileTree />
+          <EntryPoints />
+          <LanguageChart />
+          <div className="grid lg:grid-cols-2 gap-8">
+            <ActivityCharts />
+            <ActivityInsights />
+          </div>
+          <TopContributors />
+          <BestFirstSteps />
+          <ContributionInsights />
+          <HowToContribute />
+          <ContributionIdeas />
+        </main>
+      </div>
 
-      <AIChatbot />
+      <AIChatbot open={chatOpen} onOpenChange={setChatOpen} />
       <SaveRepoModal open={saveOpen} onOpenChange={setSaveOpen} />
     </div>
   );
