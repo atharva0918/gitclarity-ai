@@ -34,15 +34,32 @@ async function fetchEndpoint(owner: string, repo: string, endpoint: string) {
   return data;
 }
 
-async function fetchAISummary(repoContext: string) {
-  const { data, error } = await supabase.functions.invoke("groq-chat", {
-    body: {
-      messages: [{ role: "user", content: "Provide a concise summary of this repository in 3-4 paragraphs. Cover: what it does, key technologies, and how it's structured." }],
-      repoContext,
-    },
-  });
-  if (error) return "Unable to generate AI summary.";
-  return data?.content || "No summary available.";
+async function fetchAISummary(repoContext: string): Promise<string> {
+  const body = {
+    messages: [{ role: "user", content: "Provide a concise summary of this repository in 3-4 paragraphs. Cover: what it does, key technologies, and how it's structured." }],
+    repoContext,
+  };
+
+  // Retry up to 3 times with exponential backoff to handle transient gateway hiccups
+  let lastErr: any = null;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const { data, error } = await supabase.functions.invoke("groq-chat", { body });
+      if (error) { lastErr = error; }
+      else if (data?.error) { lastErr = new Error(data.error); }
+      else if (data?.content && typeof data.content === "string" && data.content.trim().length > 0) {
+        return data.content;
+      } else {
+        lastErr = new Error("Empty AI response");
+      }
+    } catch (e) {
+      lastErr = e;
+    }
+    // Backoff: 800ms, 1600ms
+    if (attempt < 2) await new Promise((r) => setTimeout(r, 800 * (attempt + 1)));
+  }
+  console.error("AI summary failed after retries:", lastErr);
+  return "Unable to generate AI summary right now. Please try analyzing the repository again in a moment.";
 }
 
 export function RepoProvider({ children }: { children: React.ReactNode }) {
